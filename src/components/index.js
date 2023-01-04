@@ -1,4 +1,5 @@
 import Decimal from "./Decimal.vue";
+import NegativeDecimal from "./NegativeDecimal.vue";
 import Integer from "./Integer.vue";
 import DateTime from "./DateTime.vue";
 import DateTimePicker from "./DateTimePicker.vue";
@@ -11,6 +12,7 @@ import DotNumber from "./DotNumber.vue";
 
 function install(Vue) {
   Vue.component("v-text-field-money", Decimal);
+  Vue.component("v-text-field-negative-money", NegativeDecimal);
   Vue.component("v-text-field-percent", Decimal);
   Vue.component("v-text-field-integer", Integer);
   Vue.component("v-text-field-datetime", DateTime);

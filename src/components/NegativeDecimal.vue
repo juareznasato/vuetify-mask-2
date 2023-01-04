@@ -20,9 +20,8 @@
 
 <script>
 export default {
-  model: { prop: "value", event: "input" },
   props: {
-    value: {
+    modelValue: {
       type: [String, Number],
       default: "0",
     },
@@ -36,13 +35,13 @@ export default {
     },
     properties: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
       },
     },
     options: {
       type: Object,
-      default: function() {
+      default: function () {
         return {
           locale: "pt-BR",
           length: 11,
@@ -53,6 +52,7 @@ export default {
     },
   },
   data: () => ({
+    // Block é utilizado para bloquear a emissão de um sinal positivo, após um valor negativo tornar-se positivo.
     block: false,
   }),
   /*
@@ -61,21 +61,21 @@ export default {
   */
   computed: {
     cmpValue: {
-      get: function() {
-        return this.humanFormat(this.value);
+      get: function () {
+        return this.humanFormat(this.modelValue);
       },
-      set: function(newValue) {
-        this.$emit("input", this.machineFormat(newValue));
+      set: function (newValue) {
+        this.$emit("update:modelValue", this.machineFormat(newValue));
       },
     },
   },
   watch: {},
   methods: {
-    humanFormat: function(value) {
+    humanFormat: function (value) {
       if (value || value === 0) {
         if (value < 0) {
           value = value * -1;
-          this.$emit("input", value);
+          this.$emit("update:modelValue", value);
           this.$emit("signal", "-");
           this.block = true;
         } else {
@@ -103,7 +103,10 @@ export default {
         value =
           value.substring(0, value.length - parseInt(this.options.precision)) +
           "." +
-          value.substring(value.length - parseInt(this.options.precision), value.length);
+          value.substring(
+            value.length - parseInt(this.options.precision),
+            value.length
+          );
         if (value === "") {
           value = this.options.empty;
         }
@@ -114,7 +117,7 @@ export default {
     },
 
     // Retira todos os caracteres não numéricos e zeros à esquerda
-    clearNumber: function(value) {
+    clearNumber: function (value) {
       let result = "";
       if (value) {
         let flag = false;
@@ -146,7 +149,7 @@ export default {
       let keyCode = $event.keyCode ? $event.keyCode : $event.which;
       // Positive key
       if (keyCode === 43) {
-        this.$emit("signal", ""); // +
+        this.$emit("signal", "+"); // +
       }
       // Negative key
       if (keyCode === 45) {

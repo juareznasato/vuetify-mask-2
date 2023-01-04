@@ -20,9 +20,8 @@
 
 <script>
 export default {
-  model: { prop: "value", event: "input" },
   props: {
-    value: {
+    modelValue: {
       type: [String, Number],
       default: "0",
     },
@@ -32,13 +31,13 @@ export default {
     },
     properties: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
       },
     },
     options: {
       type: Object,
-      default: function() {
+      default: function () {
         return {
           locale: "pt-BR",
           length: 11,
@@ -55,17 +54,17 @@ export default {
   */
   computed: {
     cmpValue: {
-      get: function() {
-        return this.humanFormat(this.value);
+      get: function () {
+        return this.humanFormat(this.modelValue);
       },
-      set: function(newValue) {
-        this.$emit("input", this.machineFormat(newValue));
+      set: function (newValue) {
+        this.$emit("update:modelValue", this.machineFormat(newValue));
       },
     },
   },
   watch: {},
   methods: {
-    humanFormat: function(value) {
+    humanFormat: function (value) {
       if (value || value === 0) {
         value = Number(value).toLocaleString(this.options.locale, {
           maximumFractionDigits: this.options.precision,
@@ -100,7 +99,7 @@ export default {
     },
 
     // Retira todos os caracteres não numéricos e zeros à esquerda
-    clearNumber: function(value) {
+    clearNumber: function (value) {
       let result = "";
       if (value) {
         let flag = false;
@@ -150,7 +149,6 @@ export default {
         this.$refs.ref.focus();
       }, 500);
     },
-    
   },
 };
 </script>
