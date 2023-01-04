@@ -38,9 +38,9 @@
           <v-col cols="12" sm="12" md="6">
             <v-text-field-datetime />
           </v-col>
-          <v-col cols="12" sm="12" md="6">
+          <!-- <v-col cols="12" sm="12" md="6">
             <v-text-field-datetimepicker />
-          </v-col>
+          </v-col> -->
           <v-col cols="12" sm="12" md="6">
             <v-text-field-cpf />
           </v-col>
@@ -65,7 +65,7 @@ import testNegativeMoney from "./TestNegativeMoney.vue";
 import testPercent from "./TestPercent.vue";
 import testInteger from "./TestInteger.vue";
 import testDateTime from "./TestDateTime.vue";
-import testDateTimePicker from "./TestDateTimePicker.vue";
+//import testDateTimePicker from "./TestDateTimePicker.vue";
 import testCreditCard from "./TestCreditCard.vue";
 import testPhoneNumber from "./TestPhoneNumber.vue";
 import testSimpleMask from "./TestSimpleMask.vue";
@@ -92,7 +92,7 @@ export default {
     "v-text-field-cep": testCep,
     "v-text-field-filebase64": testFileBase64,
     "v-text-field-dotnumber": testDotNumber,
-    "v-text-field-datetimepicker": testDateTimePicker,
+    //"v-text-field-datetimepicker": testDateTimePicker,
     "v-text-field-yearmonthdayday": testYearMonthDayDay,
   },
 };

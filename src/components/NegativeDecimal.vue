@@ -51,6 +51,16 @@ export default {
       },
     },
   },
+  emits: [
+    "blur",
+    "change",
+    "click",
+    "focus",
+    "keydown",
+    "mousedown",
+    "mouseup",
+    "signal",
+  ],
   data: () => ({
     // Block é utilizado para bloquear a emissão de um sinal positivo, após um valor negativo tornar-se positivo.
     block: false,
