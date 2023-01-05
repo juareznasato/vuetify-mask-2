@@ -1,85 +1,91 @@
-# vuetify-mask
+# vuetify-mask-2
 
 ## Project
+
 vuetify-mask-2 is a component for some main types of masks in the Vuetify.
 It works with Vue3
 
 ## Links
+
 [See Demo here](https://rzfpe.csb.app/).  
 [GitHub](https://github.com/juareznasato/vuetify-mask-2).  
 [npm](https://www.npmjs.com/package/vuetify-mask-2).
 
 ## Dependencies
-- vuejs3  
-- vuetify 2 or 3 ($ npm install vuetify --save)  
+
+- vuejs3
+- vuetify 2 or 3 ($ npm install vuetify --save)
 - moment ($ npm install moment --save)
 - material design icon ($ npm install @mdi/font -D --save)
 
 ## Install
+
 ```
 $ npm install vuetify-mask-2 --save
 ```
 
 ## Register
-1- Create a file src/plugins/vuetify-mask-2.js with:  
+
+1- Create a file src/plugins/vuetify-mask-2.js with:
+
 ```js
-import Vue from "vue";  
-import VuetifyMask from "vuetify-mask-2";  
-Vue.use(VuetifyMask);  
+import Vue from "vue";
+import VuetifyMask from "vuetify-mask-2";
+Vue.use(VuetifyMask);
 export default VuetifyMask;
 ```
 
-2- Add in src/mains.js file:  
+2- Add in src/mains.js file:
+
 ```js
 import "./plugins/vuetify-mask-2.js";
 ```
 
 ## Properties (v-bind:properties)
-You can add any v-text-field property  
-[v-text-field properties](https://next.vuetifyjs.com/en/components/text-fields/).  
 
-Properties with hyphen (single-line, background-color...) should be changed as follows:  
+You can add any v-text-field property  
+[v-text-field properties](https://next.vuetifyjs.com/en/components/text-fields/).
+
+Properties with hyphen (single-line, background-color...) should be changed as follows:
+
 ```vue
-v-bind:properties="{  
-    singleLine: true,  
-    backgroundColor: 'red'  
-}"  
+v-bind:properties="{ singleLine: true, backgroundColor: 'red' }"
 ```
 
-or  
+or
+
 ```vue
-v-bind:properties="{  
-    'single-line': true,  
-    'background-color': 'red'  
-}"  
+v-bind:properties="{ 'single-line': true, 'background-color': 'red' }"
 ```
 
 ## Options (v-bind:options)
-| Option | Component | Default | Description |
-| ------------ | ------------ | ------------ | ------------ |
-| inputMask | Money, Percent, Integer, DateTime, SimpleMask  | | mask that will be applied in the v-text-field |
-| outputMask | Money, Percent, Integer, SimpleMask, CPF, CNPJ, CEP | | mask that will be applied in the v-model |
-| empty | Money, Percent, Integer, DateTime, SimpleMask, CPF, CNPJ, CEP, DotNumber | "" | Value in v-model when v-text-field is empty. Can be null, "" or other|
-| applyAfter | Integer, SimpleMask, CPF, CNPJ, CEP, DotNumber| | The value is masked only after all typing |
-| alphanumeric | SimpleMask | false | |
-| lowerCase| SimpleMask | false | |
-| acceptFile| FileBase64 | image/* | Sets the file type to convert to base64 |
 
+| Option       | Component                                                                | Default  | Description                                                           |
+| ------------ | ------------------------------------------------------------------------ | -------- | --------------------------------------------------------------------- |
+| inputMask    | Money, Percent, Integer, DateTime, SimpleMask                            |          | mask that will be applied in the v-text-field                         |
+| outputMask   | Money, Percent, Integer, SimpleMask, CPF, CNPJ, CEP                      |          | mask that will be applied in the v-model                              |
+| empty        | Money, Percent, Integer, DateTime, SimpleMask, CPF, CNPJ, CEP, DotNumber | ""       | Value in v-model when v-text-field is empty. Can be null, "" or other |
+| applyAfter   | Integer, SimpleMask, CPF, CNPJ, CEP, DotNumber                           |          | The value is masked only after all typing                             |
+| alphanumeric | SimpleMask                                                               | false    |                                                                       |
+| lowerCase    | SimpleMask                                                               | false    |                                                                       |
+| acceptFile   | FileBase64                                                               | image/\* | Sets the file type to convert to base64                               |
 
 ## Events
-| Event | value | Description |
-| ------------ | ------------ | ------------ |
-| blur | Event | Emitted when the input is blurred |
-| change | any | Emitted when the input is changed by user interaction |
-| click | MouseEvent | Emitted when input is clicked |
-| focus | Event | Emitted when component is focused |
-| keydown | KeyboardEvent | Emitted when any key is pressed |
-| mousedown | MouseEvent | Emitted when click is pressed |
-| mouseup | MouseEvent | Event mouseup |
+
+| Event     | value         | Description                                           |
+| --------- | ------------- | ----------------------------------------------------- |
+| blur      | Event         | Emitted when the input is blurred                     |
+| change    | any           | Emitted when the input is changed by user interaction |
+| click     | MouseEvent    | Emitted when input is clicked                         |
+| focus     | Event         | Emitted when component is focused                     |
+| keydown   | KeyboardEvent | Emitted when any key is pressed                       |
+| mousedown | MouseEvent    | Emitted when click is pressed                         |
+| mouseup   | MouseEvent    | Event mouseup                                         |
 
 ## How to use
 
 ### - Money (v-text-field-money)
+
 ```vue
 <template>
   <div>
@@ -106,7 +112,7 @@ v-bind:properties="{
 <script>
 export default {
   data: () => ({
-    value: "123456789.00",    // 123456789.00 or "123456789.00" or "" or null
+    value: "123456789.00", // 123456789.00 or "123456789.00" or "" or null
     label: "Money",
     disabled: false,
   }),
@@ -114,7 +120,8 @@ export default {
 </script>
 ```
 
-### - Percent  (v-text-field-percent)
+### - Percent (v-text-field-percent)
+
 ```vue
 <template>
   <div>
@@ -141,16 +148,16 @@ export default {
 <script>
 export default {
   data: () => ({
-    value: "12.34",        // 12.34 or "12.34" or "" or null
+    value: "12.34", // 12.34 or "12.34" or "" or null
     label: "Percent",
     focus: false,
   }),
 };
 </script>
-
 ```
 
-### - Integer  (v-text-field-integer)
+### - Integer (v-text-field-integer)
+
 ```vue
 <template>
   <div>
@@ -186,8 +193,10 @@ export default {
 </script>
 ```
 
-### - DateTime  (v-text-field-datetime)
+### - DateTime (v-text-field-datetime)
+
 &nbsp; works in milliseconds
+
 ```vue
 <template>
   <div>
@@ -214,15 +223,18 @@ export default {
 <script>
 export default {
   data: () => ({
-    value: "1595386800000",    // Milliseconds
+    value: "1595386800000", // Milliseconds
     label: "DateTime",
     focus: false,
   }),
 };
 </script>
 ```
-### - DateTimePicker  (v-text-field-datetimepicker)
+
+### - DateTimePicker (v-text-field-datetimepicker)
+
 &nbsp; works in milliseconds
+
 ```vue
 <template>
   <div>
@@ -257,7 +269,8 @@ export default {
 </script>
 ```
 
-### - Credit Card  (v-text-field-simplemask)
+### - Credit Card (v-text-field-simplemask)
+
 ```vue
 <template>
   <div>
@@ -297,7 +310,8 @@ export default {
 </script>
 ```
 
-### - Phone Number  (v-text-field-simplemask)
+### - Phone Number (v-text-field-simplemask)
+
 ```vue
 <template>
   <div>
@@ -338,8 +352,10 @@ export default {
 </script>
 ```
 
-### - Simple Mask  (v-text-field-simplemask)
+### - Simple Mask (v-text-field-simplemask)
+
 &nbsp; You can create your masks.
+
 ```vue
 <template>
   <div>
@@ -379,8 +395,10 @@ export default {
 </script>
 ```
 
-### - Files  (v-text-field-filebase64)
+### - Files (v-text-field-filebase64)
+
 &nbsp;Convert files to base 64.
+
 ```vue
 <template>
   <div>
@@ -390,10 +408,10 @@ export default {
       v-bind:properties="{
         outlined: true,
         placeholder: ' ',
-        appendIcon:'mdi-message-image-outline',
+        appendIcon: 'mdi-message-image-outline',
       }"
       v-bind:options="{
-        acceptFile:'image/*',
+        acceptFile: 'image/*',
       }"
       v-on:fileName="fileName = $event"
     />
@@ -403,22 +421,22 @@ export default {
 <script>
 export default {
   data: () => ({
-    value:"",
+    value: "",
     fileName: "",
     label: "Select Image",
   }),
 };
 </script>
 
-Other acceptFile options:
-acceptFile:'image/*'
-acceptFile:'application/pdf'
+Other acceptFile options: acceptFile:'image/*' acceptFile:'application/pdf'
 acceptFile:'image/jpeg,image/gif,image/png,application/pdf'
 acceptFile:'image/jpeg,image/gif,image/png,application/pdf,image/x-eps'
 ```
 
-### - DotNumber  (v-text-field-dotnumber)
+### - DotNumber (v-text-field-dotnumber)
+
 &nbsp;Accept only dot and numbers.
+
 ```vue
 <template>
   <div>
@@ -450,9 +468,10 @@ export default {
 </script>
 ```
 
+### - CPF (v-text-field-cpf)
 
-### - CPF  (v-text-field-cpf)
 &nbsp;brazilian mask
+
 ```vue
 <template>
   <div>
@@ -487,8 +506,10 @@ export default {
 </script>
 ```
 
-### - CNPJ  (v-text-field-cnpj)
+### - CNPJ (v-text-field-cnpj)
+
 &nbsp;brazilian mask
+
 ```vue
 <template>
   <div>
@@ -522,8 +543,10 @@ export default {
 </script>
 ```
 
-### - CEP  (v-text-field-cep)
+### - CEP (v-text-field-cep)
+
 &nbsp;brazilian mask
+
 ```vue
 <template>
   <div>
