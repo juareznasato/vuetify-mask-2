@@ -20,9 +20,8 @@
 
 <script>
 export default {
-  model: { prop: "value", event: "input" },
   props: {
-    value: {
+    modelValue: {
       type: [String, Number],
       default: "0",
     },
@@ -32,13 +31,13 @@ export default {
     },
     properties: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
       },
     },
     options: {
       type: Object,
-      default: function() {
+      default: function () {
         return {
           inputMask: "#########",
           outputMask: "#########",
@@ -48,6 +47,16 @@ export default {
       },
     },
   },
+  emits: [
+    "blur",
+    "change",
+    "click",
+    "focus",
+    "keydown",
+    "mousedown",
+    "mouseup",
+    "update:modelValue",
+  ],
   data: () => ({}),
   /*
    v-model="cmpValue": Dessa forma, ao digitar, o valor é atualizado automaticamente no componente pai.
@@ -55,17 +64,17 @@ export default {
   */
   computed: {
     cmpValue: {
-      get: function() {
-        return this.humanFormat(String(this.value));
+      get: function () {
+        return this.humanFormat(String(this.modelValue));
       },
-      set: function(newValue) {
-        this.$emit("input", this.machineFormat(newValue));
+      set: function (newValue) {
+        this.$emit("update:modelValue", this.machineFormat(newValue));
       },
     },
   },
   watch: {},
   methods: {
-    humanFormat: function(value) {
+    humanFormat: function (value) {
       if (value) {
         value = this.formatValue(value, this.options.inputMask);
       } else {
@@ -95,11 +104,11 @@ export default {
       return value;
     },
 
-    formatValue: function(value, mask) {
+    formatValue: function (value, mask) {
       return this.formatDefault(value, mask);
     },
 
-    formatDefault: function(value, mask) {
+    formatDefault: function (value, mask) {
       value = this.clearValue(value);
       let result = "";
       let count = 0;
@@ -130,7 +139,7 @@ export default {
       }
     },
 
-    clearValue: function(value) {
+    clearValue: function (value) {
       let result = "";
       if (value) {
         let arrayValue = value.toString().split("");
@@ -156,7 +165,6 @@ export default {
         this.$refs.ref.focus();
       }, 500);
     },
-    
   },
 };
 </script>

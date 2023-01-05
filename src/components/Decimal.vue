@@ -47,6 +47,16 @@ export default {
       },
     },
   },
+  emits: [
+    "blur",
+    "change",
+    "click",
+    "focus",
+    "keydown",
+    "mousedown",
+    "mouseup",
+    "update:modelValue",
+  ],
   data: () => ({}),
   /*
    v-model="cmpValue": Dessa forma, ao digitar, o valor é atualizado automaticamente no componente pai.

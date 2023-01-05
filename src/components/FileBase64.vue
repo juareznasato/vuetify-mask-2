@@ -1,11 +1,6 @@
 <template>
   <div>
-    <v-dialog
-      v-model="showDialog"
-      scrollable
-      max-width="30%"
-      v-if="fileBase64"
-    >
+    <v-dialog v-model="showDialog" scrollable max-width="30%" v-if="fileBase64">
       <img v-bind:src="fileBase64" />
     </v-dialog>
     <v-text-field
@@ -33,9 +28,8 @@
 
 <script>
 export default {
-  model: { prop: "value", event: "input" },
   props: {
-    value: {
+    modelValue: {
       type: [String],
       default: "",
     },
@@ -45,20 +39,30 @@ export default {
     },
     properties: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
       },
     },
     options: {
       type: Object,
-      default: function() {
+      default: function () {
         return {
-          acceptFile:"image/*,application/pdf",
+          acceptFile: "image/*,application/pdf",
         };
       },
     },
   },
-
+  emits: [
+    "blur",
+    "change",
+    "click",
+    "focus",
+    "keydown",
+    "mousedown",
+    "mouseup",
+    "fileName",
+    "update:modelValue",
+  ],
   data: () => ({
     imageName: "",
     imageFile: "",
@@ -68,8 +72,8 @@ export default {
 
   computed: {
     cmpValue: {
-      get: function() {
-        this.setImage(this.value);
+      get: function () {
+        this.setImage(this.modelValue);
         return this.imageName;
       },
     },
@@ -94,7 +98,7 @@ export default {
         fileReader.addEventListener("load", () => {
           this.fileBase64 = fileReader.result;
           this.imageFile = files[0];
-          this.$emit("input", this.fileBase64);
+          this.$emit("update:modelValue", this.fileBase64);
           this.$emit("fileName", this.imageName);
         });
       } else {
