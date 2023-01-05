@@ -1,19 +1,48 @@
 {
   "name": "vuetify3-mask",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.0.1",
+  "description": "Mask components to Vuetify and Vue3",
+  "private": false,
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "main": "index.js",
+  "author": {
+    "name": "Juarez Nasato",
+    "email": "juareznasato@gmail.com"
+  },
+  "keywords": [
+    "vuejs",
+    "vuetify",
+    "v-text-field",
+    "mask",
+    "number",
+    "money",
+    "integer",
+    "datetime",
+    "datetimepicker",
+    "decimal",
+    "percent",
+    "phonenumber",
+    "creditcard",
+    "cpf",
+    "cnpj",
+    "cep",
+    "base64"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/juareznasato/vuetify-mask-2.git"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
-  "dependencies": {
+  "devDependencies": {
     "moment": "^2.29.4",
     "vue": "^3.2.45",
-    "vuetify": "^3.0.6"
-  },
-  "devDependencies": {
+    "vuetify": "^3.0.6",
     "@rushstack/eslint-patch": "^1.1.4",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/eslint-config-prettier": "^7.0.0",
