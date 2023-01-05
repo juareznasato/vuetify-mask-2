@@ -178,7 +178,9 @@ export default {
 
     validateCpf: function (cpf) {
       cpf = cpf.replace(/[^\d]+/g, "");
-      if (cpf == "") return false;
+      if (cpf == "") {
+        return false;
+      }
       // Eliminar CPFs invalidos conhecidos
       if (
         cpf.length != 11 ||
@@ -192,20 +194,33 @@ export default {
         cpf == "77777777777" ||
         cpf == "88888888888" ||
         cpf == "99999999999"
-      )
+      ) {
         return false;
+      }
       // Validar 1o digito
       let add = 0;
-      for (var i = 0; i < 9; i++) add += parseInt(cpf.charAt(i)) * (10 - i);
+      for (var i = 0; i < 9; i++) {
+        add += parseInt(cpf.charAt(i)) * (10 - i);
+      }
       let rev = 11 - (add % 11);
-      if (rev == 10 || rev == 11) rev = 0;
-      if (rev != parseInt(cpf.charAt(9))) return false;
+      if (rev == 10 || rev == 11) {
+        rev = 0;
+      }
+      if (rev != parseInt(cpf.charAt(9))) {
+        return false;
+      }
       // Validar 2o digito
       add = 0;
-      for (var j = 0; j < 10; j++) add += parseInt(cpf.charAt(j)) * (11 - j);
+      for (var j = 0; j < 10; j++) {
+        add += parseInt(cpf.charAt(j)) * (11 - j);
+      }
       rev = 11 - (add % 11);
-      if (rev == 10 || rev == 11) rev = 0;
-      if (rev != parseInt(cpf.charAt(10))) return false;
+      if (rev == 10 || rev == 11) {
+        rev = 0;
+      }
+      if (rev != parseInt(cpf.charAt(10))) {
+        return false;
+      }
       return true;
     },
   },
