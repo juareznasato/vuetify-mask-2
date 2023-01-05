@@ -4,7 +4,7 @@
       v-model="value"
       v-bind:label="label"
       v-bind:properties="{
-        prefix: 'R$ ' + signal,
+        prefix: signal + 'R$ ',
         readonly: false,
         disabled: disabled,
         outlined: false,
@@ -21,7 +21,15 @@
       ref="ref"
     />
     v-model:
-    {{ value !== null && value !== "" ? value : value === null ? "null" : value === "" ? "''" : "" }}<br />
+    {{
+      value !== null && value !== ""
+        ? value
+        : value === null
+        ? "null"
+        : value === ""
+        ? "''"
+        : ""
+    }}<br />
     signal: {{ signal }}
   </div>
 </template>
@@ -34,7 +42,7 @@ export default {
     "v-text-field-negative-money": NegativeMoney,
   },
   data: () => ({
-    value: -123456789.0, // 1.23 or "1.23" or "" or null
+    value: "-123456789.0", // 1.23 or "1.23" or "" or null
     label: "Negative Money",
     disabled: false,
     signal: "",

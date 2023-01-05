@@ -60,6 +60,7 @@ export default {
     "mousedown",
     "mouseup",
     "signal",
+    "update:modelValue",
   ],
   data: () => ({
     // Block é utilizado para bloquear a emissão de um sinal positivo, após um valor negativo tornar-se positivo.
@@ -160,10 +161,12 @@ export default {
       // Positive key
       if (keyCode === 43) {
         this.$emit("signal", "+"); // +
+        this.block = false;
       }
       // Negative key
       if (keyCode === 45) {
         this.$emit("signal", "-");
+        this.block = true;
       }
       // if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) {
       if (keyCode < 48 || keyCode > 57) {
