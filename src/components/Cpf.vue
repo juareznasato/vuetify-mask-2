@@ -5,8 +5,10 @@
       v-bind:label="label"
       v-bind="properties"
       v-bind:maxlength="inputMask.length"
-      v-bind:append-icon="options.applyAfter && value ? 'mdi-check-circle' : ''"
-      v-bind:success="options.applyAfter && value ? true : false"
+      v-bind:append-icon="
+        options.applyAfter && modelValue ? 'mdi-check-circle' : ''
+      "
+      v-bind:success="options.applyAfter && modelValue ? true : false"
       v-on:keypress="keyPress"
       v-on:blur="$emit('blur')"
       v-on:change="$emit('change')"
@@ -22,9 +24,8 @@
 
 <script>
 export default {
-  model: { prop: "value", event: "input" },
   props: {
-    value: {
+    modelValue: {
       type: [String, Number],
       default: "0",
     },
@@ -34,13 +35,13 @@ export default {
     },
     properties: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
       },
     },
     options: {
       type: Object,
-      default: function() {
+      default: function () {
         return {
           outputMask: "###########",
           empty: "",
@@ -49,6 +50,17 @@ export default {
       },
     },
   },
+  emits: [
+    "blur",
+    "change",
+    "click",
+    "focus",
+    "keydown",
+    "mousedown",
+    "mouseup",
+    "masked",
+    "update:modelValue",
+  ],
   data: () => ({
     inputMask: "###.###.###-##",
   }),
@@ -58,17 +70,17 @@ export default {
   */
   computed: {
     cmpValue: {
-      get: function() {
-        return this.humanFormat(this.value);
+      get: function () {
+        return this.humanFormat(this.modelValue);
       },
-      set: function(newValue) {
-        this.$emit("input", this.machineFormat(newValue));
+      set: function (newValue) {
+        this.$emit("update:modelValue", this.machineFormat(newValue));
       },
     },
   },
   watch: {},
   methods: {
-    humanFormat: function(value) {
+    humanFormat: function (value) {
       if (value) {
         value = this.formatValue(value, this.inputMask);
       } else {
@@ -102,11 +114,11 @@ export default {
       return value;
     },
 
-    formatValue: function(value, mask) {
+    formatValue: function (value, mask) {
       return this.formatCpf(value, mask);
     },
 
-    formatCpf: function(value, mask) {
+    formatCpf: function (value, mask) {
       value = this.clearValue(value);
       let result = "";
       let count = 0;
@@ -137,7 +149,7 @@ export default {
       }
     },
 
-    clearValue: function(value) {
+    clearValue: function (value) {
       let result = "";
       if (value) {
         let arrayValue = value.toString().split("");
@@ -164,7 +176,7 @@ export default {
       }, 500);
     },
 
-    validateCpf: function(cpf) {
+    validateCpf: function (cpf) {
       cpf = cpf.replace(/[^\d]+/g, "");
       if (cpf == "") return false;
       // Eliminar CPFs invalidos conhecidos
@@ -185,13 +197,13 @@ export default {
       // Validar 1o digito
       let add = 0;
       for (var i = 0; i < 9; i++) add += parseInt(cpf.charAt(i)) * (10 - i);
-      rev = 11 - (add % 11);
+      let rev = 11 - (add % 11);
       if (rev == 10 || rev == 11) rev = 0;
       if (rev != parseInt(cpf.charAt(9))) return false;
       // Validar 2o digito
       add = 0;
       for (var j = 0; j < 10; j++) add += parseInt(cpf.charAt(j)) * (11 - j);
-      let rev = 11 - (add % 11);
+      rev = 11 - (add % 11);
       if (rev == 10 || rev == 11) rev = 0;
       if (rev != parseInt(cpf.charAt(10))) return false;
       return true;
