@@ -5,8 +5,8 @@
       v-bind:label="label"
       v-bind="properties"
       v-bind:maxlength="options.inputMask.length"
-      v-bind:append-icon="(value) ? 'mdi-check-circle' : ''"
-      v-bind:success="(value) ? true : false"
+      v-bind:append-icon="modelValue ? 'mdi-check-circle' : ''"
+      v-bind:success="modelValue ? true : false"
       v-on:keypress="keyPress"
       v-on:blur="$emit('blur')"
       v-on:change="$emit('change')"
@@ -24,9 +24,8 @@
 import moment from "moment";
 
 export default {
-  model: { prop: "value", event: "input" },
   props: {
-    value: {
+    modelValue: {
       type: [String, Number],
       default: "0",
     },
@@ -36,13 +35,13 @@ export default {
     },
     properties: {
       type: Object,
-      default: function() {
+      default: function () {
         return {};
       },
     },
     options: {
       type: Object,
-      default: function() {
+      default: function () {
         return {
           inputMask: "YYYY-MM-DD HH:mm:ss",
           empty: "",
@@ -50,6 +49,17 @@ export default {
       },
     },
   },
+  emits: [
+    "blur",
+    "change",
+    "click",
+    "focus",
+    "keydown",
+    "mousedown",
+    "mouseup",
+    "masked",
+    "update:modelValue",
+  ],
   data: () => ({}),
   /*
    v-model="cmpValue": Dessa forma, ao digitar, o valor é atualizado automaticamente no componente pai.
@@ -57,18 +67,17 @@ export default {
   */
   computed: {
     cmpValue: {
-      get: function() {
-        return this.humanFormat(this.value);
+      get: function () {
+        return this.humanFormat(this.modelValue);
       },
-      set: function(newValue) {
-        this.$emit("input", this.machineFormat(newValue));
+      set: function (newValue) {
+        this.$emit("update:modelValue", this.machineFormat(newValue));
       },
     },
   },
-  watch: {
-  },
+  watch: {},
   methods: {
-    humanFormat: function(value) {
+    humanFormat: function (value) {
       if (value) {
         value = moment(this.toDate(this.toInteger(value))).format(
           this.options.inputMask
@@ -107,11 +116,11 @@ export default {
       return value;
     },
 
-    formatValue: function(value, mask) {
+    formatValue: function (value, mask) {
       return this.formatDate(value, mask);
     },
 
-    formatDate: function(value, mask) {
+    formatDate: function (value, mask) {
       value = this.clearValue(value);
       let result = "";
       let count = 0;
@@ -149,7 +158,7 @@ export default {
       }
     },
 
-    clearValue: function(value) {
+    clearValue: function (value) {
       let result = "";
       if (value) {
         let arrayValue = value.toString().split("");
@@ -175,12 +184,12 @@ export default {
     },
 
     /* String Date to Milliseconds */
-    toMillisecond: function(value) {
+    toMillisecond: function (value) {
       return Date.parse(value);
     },
 
     /* Milliseconds to Date*/
-    toDate: function(value) {
+    toDate: function (value) {
       return new Date(value); // Return String
     },
 
@@ -189,7 +198,6 @@ export default {
         this.$refs.ref.focus();
       }, 500);
     },
-
   },
 };
 </script>

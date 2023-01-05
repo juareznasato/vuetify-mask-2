@@ -38,9 +38,9 @@
           <v-col cols="12" sm="12" md="6">
             <v-text-field-datetime />
           </v-col>
-          <!-- <v-col cols="12" sm="12" md="6">
-            <v-text-field-datetimepicker />
-          </v-col> -->
+          <v-col cols="12" sm="12" md="6">
+            <!-- <v-text-field-datetimepicker /> -->
+          </v-col>
           <v-col cols="12" sm="12" md="6">
             <v-text-field-cpf />
           </v-col>
